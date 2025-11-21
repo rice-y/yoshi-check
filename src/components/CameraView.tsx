@@ -4,9 +4,10 @@ import React, { useRef, forwardRef, useImperativeHandle } from "react";
 import Webcam from "react-webcam";
 
 const videoConstraints = {
-  width: 720,
-  height: 1280,
+  width: { ideal: 1280 },
+  height: { ideal: 720 },
   facingMode: "environment", // Use rear camera on mobile
+  aspectRatio: { ideal: 16 / 9 },
 };
 
 export interface CameraHandle {
@@ -32,7 +33,7 @@ export const CameraView = forwardRef<CameraHandle>((_, ref) => {
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         videoConstraints={videoConstraints}
-        className="absolute top-0 left-0 h-full w-full object-cover"
+        className="absolute top-0 left-0 h-full w-full object-contain"
         forceScreenshotSourceSize={true}
       />
       {/* Overlay for target guide */}
